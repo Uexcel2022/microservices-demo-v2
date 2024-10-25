@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: card
+  datasource:
+    url: jdbc:mysql://localhost:3307/sys
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+
+  sql:
+    init:
+      mode: always
+
+  profiles:
+    active: prod
+
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#  optional:configserver:http://localhost:8071/ where the configuration is not so important
+
+server:
+  port: 9000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

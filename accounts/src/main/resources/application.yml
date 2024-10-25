@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: accounts
+  datasource:
+    url: jdbc:mysql://localhost:3306/sys
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+
+  sql:
+    init:
+      mode: always
+
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+  profiles:
+    active: prod
+
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#   optional:configserver:http;//localhost:8071/ -optional when the profile is not too important
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
