@@ -25,25 +25,25 @@ services:
       file: common-config.yml
       service: microservice-db-config
 
-  #  cardDB:
-  #    container_name: cardDB
-  #    ports:
-  #      - 3307:3306
-  #    environment:
-  #      MYSQL_DATABASE: cardDB
-  #    extends:
-  #      file: common-config.yml
-  #      service: microservice-db-config
+  cardDB:
+    container_name: cardDB
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: cardDB
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
 
-  #  loandb:
-  #    container_name: loandb
-  #    ports:
-  #      - 3308:3306
-  #    environment:
-  #      MYSQL_DATABASE: loandb
-  #    extends:
-  #      file: common-config.yml
-  #      service: microservice-db-config
+  loanDB:
+    container_name: loanDB
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_DATABASE: loanDB
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
 
 
   configserver:
@@ -87,9 +87,9 @@ services:
       - "8090:8090"
     environment:
       SPRING_APPLICATION_NAME: "loan"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://accountDB:3306/sys"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://loanDB:3306/sys"
     depends_on:
-      accountDB:
+      loanDB:
         condition: service_healthy
     extends:
       file: common-config.yml
@@ -103,9 +103,9 @@ services:
       - "9000:9000"
     environment:
       SPRING_APPLICATION_NAME: "card"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://accountDB:3306/sys"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://cardDB:3306/sys"
     depends_on:
-      accountDB:
+      cardDB:
         condition: service_healthy
     extends:
       file: common-config.yml
